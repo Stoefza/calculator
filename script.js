@@ -1,15 +1,20 @@
 let firstNumber = "";
 let secondNumber;
-let numberInput = "0";
+let numberInput = "";
 let operator;
 
 const numberButtons = document.querySelectorAll(".number-button");
 const clearButton = document.getElementById("clear").addEventListener("click", () => clear());
+const displayValue = document.querySelector(".display-value");
 
 numberButtons.forEach(button => {
 	button.addEventListener("click", function () {
-		numberInput += button.textContent;
-		console.log('number input:' + numberInput);
+		if (numberInput === "" && button.textContent === "0") {
+		} else {
+			numberInput += button.textContent;
+			console.log("number input:" + numberInput);
+			displayValue.textContent = numberInput;
+		}
 	});
 });
 
@@ -48,5 +53,7 @@ function clear() {
 	console.log("Clearing");
 	firstNumber = "";
 	secondNumber = "";
+    numberInput = "";
 	operator = "";
+	displayValue.textContent = "";
 }
