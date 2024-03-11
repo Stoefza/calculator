@@ -1,9 +1,8 @@
 let firstNumber = 0;
 let secondNumber = 0;
 let numberInput = "";
-let operator;
+let operator = "";
 let result = 0;
-let operatorClicked = 0;
 
 const numberButtons = document.querySelectorAll(".number-button");
 const clearButton = document.getElementById("clear").addEventListener("click", () => clear());
@@ -18,22 +17,19 @@ numberButtons.forEach(button => {
 	button.addEventListener("click", function () {
 		if (numberInput === "" && button.textContent === "0") {
 		} else {
-			numberInput += button.textContent;
+			numberInput += parseInt(button.textContent);
 			displayValue.textContent = numberInput;
-			firstNumber = parseInt(numberInput);
-			// console.log(`first number: ${firstNumber}`);
+			if (result) {
+				// appendToDisplay(numberInput);
+			} else {
+			}
 		}
 	});
 });
 
-// Build function to run on operator click and
-// set the firstNumber = numberInput
-
 // addition function
 function add(num1, num2) {
-	console.log(`the type of First Number ` + typeof(firstNumber))
-	console.log(`the type of Second Number ` + typeof(secondNumber))
-	let value = (num1 + num2)
+	let value = num1 + num2;
 	return value;
 }
 //subtract function
@@ -53,8 +49,6 @@ function devide(num1, num2) {
 function operate(firstNumber, operator, secondNumber) {
 	switch (operator) {
 		case "+":
-			console.log(`the type of First Number ` + typeof(firstNumber))
-			console.log(`the type of Second Number ` + typeof(secondNumber))
 			return add(firstNumber, secondNumber);
 		case "-":
 			return subtract(firstNumber, secondNumber);
@@ -76,81 +70,55 @@ function clear() {
 	operator = "";
 	result = 0;
 	operatorClicked = 0;
-	displayValue.textContent = "";
-	calcValue.textContent = ""
-
+	displayValue.textContent = "0";
+	calcValue.textContent = "";
 }
 
 operationButtons.forEach(operationButton => {
 	operationButton.addEventListener("click", () => {
-		operatorClicked++;
-		console.log(operator)
-		if (operationButton.textContent !== operator){
-			operator = operationButton.textContent
 
+		if (firstNumber == 0) {
+			result = 0;
+			firstNumber = parseInt(numberInput);
+			operator = operationButton.textContent;
 		} else {
-			firstNumber = operate(firstNumber,operator,firstNumber)
-			calcValue.textContent = firstNumber
-			console.log(`first number: ${firstNumber}`)
-
-			console.log(operator)
-
+			if (operator === "") {
+				operator = operationButton.textContent;
+			} else {
+				let newOperator = operationButton.textContent;
+				console.log("if first exists then");
+				secondNumber = parseInt(numberInput);
+				result = getResult(firstNumber, operator, secondNumber);
+				firstNumber = result;
+				appendToDisplay(result);
+				operator = newOperator;
+			}
 		}
-		
-		// console.log(firstNumber);
-		// console.log(`opreator clicked : ${operatorClicked}`);
-		// secondNumber = firstNumber;
-		// firstNumber = 0
-		console.log(`first number: ${firstNumber}`)
-		console.log(`second number: ${secondNumber}`)
-		// calcValue.textContent = firstNumber
-		// result = operate(firstNumber,operator,secondNumber)
-		// calcValue.textContent = result
-		// calcValue.textContent = `total: ${secondNumber}`
-		// if (operatorClicked > 1){
-			
-		// 	calcValue.textContent = result
-		// 	 	result = operate(secondNumber,operator,secondNumber)
-		// 		secondNumber = result
-		// 		return result
-		// }
-		// Set second number
-		// if operator > 1 pass 2nd number twice to opariotn
-		
+
+		numberInput = "";
+		console.log(`first number: ${firstNumber}`);
+		console.log(`second number: ${secondNumber}`);
 	});
 });
 
-equalsButton.addEventListener("click", () => {});
+equalsButton.addEventListener("click", () => {
+	if (operator != "") {
+		secondNumber = parseInt(numberInput);
+		result = operate(firstNumber, operator, secondNumber);
+		calcValue.textContent = result;
+		displayValue.textContent = 0;
+		firstNumber = result;
+		numberInput = "";
+		secondNumber = 0;
+		operator = "";
+	} else {
+	}
+});
 
-// operationButtons.forEach(operationButton => {
-// 	operationButton.addEventListener("click", () => {
-// 		if (operationButton.textContent !== "=" && result == 0) {
-// 			operator = operationButton.textContent;
-// 			console.log(operator);
-// 			firstNumber = numberInput;
-// 			console.log(firstNumber);
-// 			numberInput = "";
-// 			displayValue.textContent = "";
-// 			calcValue.textContent = firstNumber
-// 			result = firstNumber;
-// 		} else {
-// 			if (result == 0) {
-// 				secondNumber = numberInput;
-// 				console.log(`First number: ${firstNumber}`);
-// 				console.log(`Second number: ${secondNumber}`);
-// 				result = operate(parseInt(firstNumber), operator, parseInt(secondNumber));
-// 				calcValue.textContent = result
-// 				displayValue.textContent = '';
-// 			} else {
-// 				secondNumber = numberInput;
-// 				console.log(`First number: ${firstNumber}`);
-// 				console.log(`Second number: ${secondNumber}`);
-// 				result = operate(parseInt(result), operator, parseInt(secondNumber));
-// 				calcValue.textContent = result
-// 				displayValue.textContent = '';
-// 			}
-// 			secondNumber = "";
-// 			numberInput = "";
-// 		}
-// 	});
-// });
+function getResult(firstNumber, operator, secondNumber) {
+	return operate(firstNumber, operator, secondNumber);
+}
+
+function appendToDisplay(strInput) {
+	calcValue.textContent = strInput;
+}
