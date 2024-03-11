@@ -81,6 +81,7 @@ operationButtons.forEach(operationButton => {
 			result = 0;
 			firstNumber = parseInt(numberInput);
 			operator = operationButton.textContent;
+			appendToDisplay(firstNumber)
 		} else {
 			if (operator === "") {
 				operator = operationButton.textContent;
@@ -102,10 +103,10 @@ operationButtons.forEach(operationButton => {
 });
 
 equalsButton.addEventListener("click", () => {
-	if (operator != "") {
+	if (operator != "" || numberInput == "") {
 		secondNumber = parseInt(numberInput);
 		result = operate(firstNumber, operator, secondNumber);
-		calcValue.textContent = result;
+		calcValue.textContent = Math.round(result*10)/10;
 		displayValue.textContent = 0;
 		firstNumber = result;
 		numberInput = "";
