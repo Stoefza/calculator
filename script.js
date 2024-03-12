@@ -9,8 +9,15 @@ const clearButton = document.getElementById("clear").addEventListener("click", (
 const displayValue = document.querySelector(".display-value");
 const calcValue = document.querySelector(".calculated-display-value");
 const equalsButton = document.querySelector(".equals-button");
+const toggleNegative = document.getElementById("toggle-neg")
 
 const operationButtons = document.querySelectorAll(".operator-button");
+
+toggleNegative.addEventListener('click', () => {
+	let newSignNumber = switchSign(numberInput)
+	displayValue.textContent = `${newSignNumber}`
+
+})
 
 // Adds an event listener to each number button and appends the number to numberInput
 numberButtons.forEach(button => {
@@ -68,20 +75,18 @@ function clear() {
 	secondNumber = 0;
 	numberInput = "";
 	operator = "";
-	result = 0;
-	operatorClicked = 0;
+	result = "";
 	displayValue.textContent = "0";
 	calcValue.textContent = "";
 }
 
 operationButtons.forEach(operationButton => {
 	operationButton.addEventListener("click", () => {
-
 		if (firstNumber == 0) {
-			result = 0;
+			result = "";
 			firstNumber = parseInt(numberInput);
 			operator = operationButton.textContent;
-			appendToDisplay(firstNumber)
+			appendToDisplay(firstNumber);
 		} else {
 			if (operator === "") {
 				operator = operationButton.textContent;
@@ -103,10 +108,15 @@ operationButtons.forEach(operationButton => {
 });
 
 equalsButton.addEventListener("click", () => {
-	if (operator != "" || numberInput == "") {
-		secondNumber = parseInt(numberInput);
+	if (operator != "") {
+		if ((numberInput == "")) {
+			secondNumber = firstNumber;
+
+		} else {
+			secondNumber = parseInt(numberInput);
+		}
 		result = operate(firstNumber, operator, secondNumber);
-		calcValue.textContent = Math.round(result*10)/10;
+		calcValue.textContent = Math.round(result * 10) / 10;
 		displayValue.textContent = 0;
 		firstNumber = result;
 		numberInput = "";
@@ -122,4 +132,20 @@ function getResult(firstNumber, operator, secondNumber) {
 
 function appendToDisplay(strInput) {
 	calcValue.textContent = strInput;
+}
+
+
+function switchSign (numberInput){
+
+	if (parseInt(numberInput) > 0) {
+		let makeNegative = numberInput * -1
+		numberInput = `${makeNegative}`
+		return `${numberInput}`
+		
+	} else if(parseInt(numberInput) < 0){
+		let makePositive = numberInput * -1
+		numberInput = `${makePositive}`
+		return `${numberInput}`
+		
+	} 
 }
