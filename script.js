@@ -1,6 +1,6 @@
 let firstNumber = 0;
 let secondNumber = 0;
-let numberInput = "";
+let numberInput = "0";
 let operator = "";
 let result = 0;
 
@@ -9,27 +9,31 @@ const clearButton = document.getElementById("clear").addEventListener("click", (
 const displayValue = document.querySelector(".display-value");
 const calcValue = document.querySelector(".calculated-display-value");
 const equalsButton = document.querySelector(".equals-button");
-const toggleNegative = document.getElementById("toggle-neg")
+const toggleNegative = document.getElementById("toggle-neg");
 
 const operationButtons = document.querySelectorAll(".operator-button");
 
-toggleNegative.addEventListener('click', () => {
-	let newSignNumber = switchSign(numberInput)
-	displayValue.textContent = `${newSignNumber}`
-
-})
+toggleNegative.addEventListener("click", () => {
+	let newSignNumber = switchSign(numberInput);
+	numberInput = `${newSignNumber}`;
+	displayValue.textContent = `${numberInput}`;
+});
 
 // Adds an event listener to each number button and appends the number to numberInput
 numberButtons.forEach(button => {
 	button.addEventListener("click", function () {
-		if (numberInput === "" && button.textContent === "0") {
-		} else {
-			numberInput += parseInt(button.textContent);
+		// if (button.textContent == ".") {
+		// 	setDecimal(numberInput)
+
+		// }
+		if (numberInput === "0" && button.textContent === "0") {
+			numberInput = button.textContent
+		} else if (numberInput === "0" && button.textContent !== '.'){
+			numberInput = button.textContent
 			displayValue.textContent = numberInput;
-			if (result) {
-				// appendToDisplay(numberInput);
-			} else {
-			}
+		} else{
+			numberInput += button.textContent;
+			displayValue.textContent = numberInput;
 		}
 	});
 });
@@ -73,7 +77,7 @@ function clear() {
 	console.log("Clearing");
 	firstNumber = 0;
 	secondNumber = 0;
-	numberInput = "";
+	numberInput = "0";
 	operator = "";
 	result = "";
 	displayValue.textContent = "0";
@@ -86,18 +90,21 @@ operationButtons.forEach(operationButton => {
 			result = "";
 			firstNumber = parseInt(numberInput);
 			operator = operationButton.textContent;
-			appendToDisplay(firstNumber);
+			appendToValueDisplay(operator);
+			appendToCalcDisplay(firstNumber);
 		} else {
 			if (operator === "") {
 				operator = operationButton.textContent;
+				appendToValueDisplay(operator);
 			} else {
 				let newOperator = operationButton.textContent;
 				console.log("if first exists then");
 				secondNumber = parseInt(numberInput);
 				result = getResult(firstNumber, operator, secondNumber);
 				firstNumber = result;
-				appendToDisplay(result);
+				appendToCalcDisplay(result);
 				operator = newOperator;
+				appendToValueDisplay(operator);
 			}
 		}
 
@@ -109,9 +116,8 @@ operationButtons.forEach(operationButton => {
 
 equalsButton.addEventListener("click", () => {
 	if (operator != "") {
-		if ((numberInput == "")) {
+		if (numberInput == "") {
 			secondNumber = firstNumber;
-
 		} else {
 			secondNumber = parseInt(numberInput);
 		}
@@ -123,6 +129,9 @@ equalsButton.addEventListener("click", () => {
 		secondNumber = 0;
 		operator = "";
 	} else {
+		result = parseInt(numberInput);
+		firstNumber = result;
+		appendToCalcDisplay(result);
 	}
 });
 
@@ -130,22 +139,29 @@ function getResult(firstNumber, operator, secondNumber) {
 	return operate(firstNumber, operator, secondNumber);
 }
 
-function appendToDisplay(strInput) {
+function appendToCalcDisplay(strInput) {
 	calcValue.textContent = strInput;
 }
 
+function appendToValueDisplay(strInput) {
+	displayValue.textContent = strInput;
+}
 
-function switchSign (numberInput){
-
+function switchSign(numberInput) {
 	if (parseInt(numberInput) > 0) {
-		let makeNegative = numberInput * -1
-		numberInput = `${makeNegative}`
-		return `${numberInput}`
+		let makeNegative = numberInput * -1;
+		return makeNegative;
+	} else if (parseInt(numberInput) < 0) {
+		let makePositive = numberInput * -1;
+		return makePositive;
+	}
+}
+
+function setDecimal(param) {
+	if (numberInput) {
 		
-	} else if(parseInt(numberInput) < 0){
-		let makePositive = numberInput * -1
-		numberInput = `${makePositive}`
-		return `${numberInput}`
+	} else {
 		
-	} 
+	}
+
 }
