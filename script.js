@@ -22,11 +22,10 @@ toggleNegative.addEventListener("click", () => {
 // Adds an event listener to each number button and appends the number to numberInput
 numberButtons.forEach(button => {
 	button.addEventListener("click", function () {
-		// if (button.textContent == ".") {
-		// 	setDecimal(numberInput)
+		if (button.textContent == "." ) {
+			setDecimal(numberInput)
 
-		// }
-		if (numberInput === "0" && button.textContent === "0") {
+		} else if (numberInput === "0" && button.textContent === "0") {
 			numberInput = button.textContent
 		} else if (numberInput === "0" && button.textContent !== '.'){
 			numberInput = button.textContent
@@ -88,7 +87,7 @@ operationButtons.forEach(operationButton => {
 	operationButton.addEventListener("click", () => {
 		if (firstNumber == 0) {
 			result = "";
-			firstNumber = parseInt(numberInput);
+			firstNumber = parseFloat(numberInput);
 			operator = operationButton.textContent;
 			appendToValueDisplay(operator);
 			appendToCalcDisplay(firstNumber);
@@ -96,10 +95,11 @@ operationButtons.forEach(operationButton => {
 			if (operator === "") {
 				operator = operationButton.textContent;
 				appendToValueDisplay(operator);
+				
 			} else {
 				let newOperator = operationButton.textContent;
 				console.log("if first exists then");
-				secondNumber = parseInt(numberInput);
+				secondNumber = parseFloat(numberInput);
 				result = getResult(firstNumber, operator, secondNumber);
 				firstNumber = result;
 				appendToCalcDisplay(result);
@@ -108,7 +108,7 @@ operationButtons.forEach(operationButton => {
 			}
 		}
 
-		numberInput = "";
+		numberInput = "0";
 		console.log(`first number: ${firstNumber}`);
 		console.log(`second number: ${secondNumber}`);
 	});
@@ -119,17 +119,17 @@ equalsButton.addEventListener("click", () => {
 		if (numberInput == "") {
 			secondNumber = firstNumber;
 		} else {
-			secondNumber = parseInt(numberInput);
+			secondNumber = parseFloat(numberInput);
 		}
 		result = operate(firstNumber, operator, secondNumber);
-		calcValue.textContent = Math.round(result * 10) / 10;
+		calcValue.textContent = Math.round(result * 100) / 100;
 		displayValue.textContent = 0;
 		firstNumber = result;
-		numberInput = "";
+		numberInput = "0";
 		secondNumber = 0;
 		operator = "";
 	} else {
-		result = parseInt(numberInput);
+		result = parseFloat(numberInput);
 		firstNumber = result;
 		appendToCalcDisplay(result);
 	}
@@ -158,9 +158,9 @@ function switchSign(numberInput) {
 }
 
 function setDecimal(param) {
-	if (numberInput) {
-		
-	} else {
+	if (!numberInput.includes('.') &&  numberInput == 0) {
+		numberInput = numberInput + '.'
+		appendToValueDisplay(numberInput)
 		
 	}
 
