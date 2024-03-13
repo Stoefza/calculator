@@ -4,49 +4,50 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="styles.css" />
-		<title>Document</title>
+		<title>Calculator by Stoef</title>
 	</head>
 	<body>
 		<h1>This will be a calculator eventually</h1>
+		<div class="calculator-container">
+			<div class="calculator">
+				<div class="display-container">
+					<div>
+						<p>Result:</p>
+						<p class="calculated-display-value display">0</p>
+					</div>
+					<div>
+						<p>Display value</p>
+						<p class="display-value display">0</p>
+					</div>
+				</div>
+				<div class="button-container">
+					<div class="numpad-container">
+						<button id="clear" class="left-pad button">Clear</button>
+						<button id="toggle-neg" class="left-pad button">+/-</button>
+						<button class="left-pad button blank"></button>
+						<button class="left-pad number-button button">1</button>
+						<button class="left-pad number-button button">2</button>
+						<button class="left-pad number-button button">3</button>
+						<button class="left-pad number-button button">4</button>
+						<button class="left-pad number-button button">5</button>
+						<button class="left-pad number-button button">6</button>
+						<button class="left-pad number-button button">7</button>
+						<button class="left-pad number-button button">8</button>
+						<button class="left-pad number-button button">9</button>
+						<button id="zero" class="left-pad number-button button">0</button>
+						<button class="left-pad number-button button">.</button>
+					</div>
+					<div class="operators-container">
+						<button class="right-pad operator-button button">/</button>
+						<button class="right-pad operator-button button">*</button>
+						<button class="right-pad operator-button button">+</button>
+						<button class="right-pad operator-button button">-</button>
 
-		<div class="display-container">
-			<div>
-				<p>Display value</p>				
-                <p class="display-value">0</p>
-			</div>
-			<div>
-				<p>Result:</p>
-				<p class="calculated-display-value"></p>
+						<button class="right-pad equals-button button">=</button>
+					</div>
+				</div>
 			</div>
 		</div>
-		
-		<div class="buttons">
-			<div class="numpad-container">
-				<button id="clear" class="left-pad">Clear</button>
-				<button id="toggle-neg" class="left-pad">+/-</button>
-				<button class="left-pad"></button>
-				<button class="left-pad number-button">1</button>
-				<button class="left-pad number-button">2</button>
-				<button class="left-pad number-button">3</button>
-				<button class="left-pad number-button">4</button>
-				<button class="left-pad number-button">5</button>
-				<button class="left-pad number-button">6</button>
-				<button class="left-pad number-button">7</button>
-				<button class="left-pad number-button">8</button>
-				<button class="left-pad number-button">9</button>
-				<button id="zero" class="left-pad number-button">0</button>
-				<button class="left-pad number-button">.</button>
-			</div>
-			<div class="operators-container">
-				<button class="right-pad operator-button">/</button>
-				<button class="right-pad operator-button">*</button>
-				<button class="right-pad operator-button">+</button>
-				<button class="right-pad operator-button">-</button>
-			
-				<button class="right-pad equals-button">=</button>
-			</div>
-		</div>
-		
 	</body>
 	<script src="script.js"></script>
 </html>
