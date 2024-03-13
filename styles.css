@@ -8,8 +8,17 @@
 	src: url('fonts/dotty.ttf') format('truetype');
 }
 
+body {
+	background-color: #001427;
+}
+
 h1 {
 	text-align: center;
+	font-family: 'dotty';
+	font-size: 86px;
+	font-weight: 400;
+	color: #e8dab2;
+	margin-bottom: 20px;
 }
 
 *{
@@ -24,8 +33,10 @@ h1 {
 	flex-direction: column;
 	align-items: center;
 	width: 320px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	background-color: #708d81;
+	border-radius: 10px;
 }
 .calculator-container {
 	display: flex;
@@ -44,6 +55,8 @@ h1 {
 	padding-top: 10px;
 	border: 1px solid black;
 	border-radius: 15px;
+	background-color: #f4d58d;
+
 }
 
 .display {
@@ -65,9 +78,19 @@ h1 {
 .button{
 	font-family: 'dotty';
 	font-size: 40px;
-	font-weight: 700;
+	font-weight: 500;
 	border-radius: 15px;
 	margin-top: 5px;
+}
+
+.number-button {
+	background-color: #fff3b0;
+	color: #8d0801;
+}
+
+#clear, #toggle-neg, .blank , .right-pad {
+	background-color: #8d0801;
+	color: #e8dab2;
 }
 
 .numpad-container {
@@ -103,4 +126,8 @@ h1 {
     width: 160px;
 	margin-left: 5px;
 	margin-right: 5px;
+}
+
+#result-text {
+	margin-bottom: 10px;
 }
