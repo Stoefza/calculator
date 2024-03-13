@@ -98,20 +98,26 @@ operationButtons.forEach(operationButton => {
 			appendToValueDisplay(0);
 			appendToCalcDisplay(firstNumber + operator);
 		} else {
-			if (operator === "") {
+			if (operator === "" && numberInput == '0') {
 				operator = operationButton.textContent;
-				// firstNumber = parseFloat(numberInput)
+				firstNumber = parseFloat(result)
 				// appendToValueDisplay(operator);
 				appendToCalcDisplay(firstNumber + operator);
-			} else {
+			} else if (operator === "" && numberInput !== '0'){
+				operator = operationButton.textContent;
+				firstNumber = parseFloat(numberInput)
+				// appendToValueDisplay(operator);
+				appendToCalcDisplay(firstNumber + operator);
+				appendToValueDisplay(0);
+
+				
+			}else {
 				let newOperator = operationButton.textContent;
 				secondNumber = parseFloat(numberInput);
 				firstNumber = getResult(firstNumber, operator, secondNumber);
 				operator = newOperator;
 				appendToValueDisplay(0);
-				appendToCalcDisplay(firstNumber);
-
-				
+				appendToCalcDisplay(firstNumber + operator);
 			}
 		}
 
@@ -122,7 +128,7 @@ operationButtons.forEach(operationButton => {
 
 equalsButton.addEventListener("click", () => {
 	if (operator != "") {
-		if (numberInput == "") {
+		if (numberInput == "" ) {
 			secondNumber = firstNumber;
 		} else {
 			secondNumber = parseFloat(numberInput);
@@ -133,7 +139,7 @@ equalsButton.addEventListener("click", () => {
 		secondNumber = 0;
 		operator = "";
 	} else {
-		result = parseFloat(numberInput);
+		// result = firstnumber;
 		firstNumber = result;
 		appendToCalcDisplay(result);
 	}
@@ -174,7 +180,7 @@ function switchSign(numberInput) {
 }
 
 function setDecimal(param) {
-	if (!numberInput.includes(".") && numberInput == 0) {
+	if (!numberInput.includes(".")) {
 		numberInput = numberInput + ".";
 		appendToValueDisplay(numberInput);
 	}
