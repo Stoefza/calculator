@@ -86,7 +86,7 @@ function clear() {
 	operator = "";
 	result = "";
 	displayValue.textContent = "0";
-	calcValue.textContent = "";
+	calcValue.textContent = "0";
 }
 
 operationButtons.forEach(operationButton => {
@@ -95,7 +95,7 @@ operationButtons.forEach(operationButton => {
 			result = "";
 			firstNumber = parseFloat(numberInput);
 			operator = operationButton.textContent;
-			// appendToValueDisplay(operator);
+			appendToValueDisplay(0);
 			appendToCalcDisplay(firstNumber + operator);
 		} else {
 			if (operator === "") {
@@ -108,7 +108,7 @@ operationButtons.forEach(operationButton => {
 				secondNumber = parseFloat(numberInput);
 				firstNumber = getResult(firstNumber, operator, secondNumber);
 				operator = newOperator;
-				// appendToValueDisplay(operator);
+				appendToValueDisplay(0);
 				appendToCalcDisplay(firstNumber);
 
 				
