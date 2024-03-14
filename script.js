@@ -129,8 +129,9 @@ equalsButton.addEventListener("click", () => {
 		} else {
 			secondNumber = parseFloat(numberInput);
 		}
-		firstNumber = getResult(firstNumber, operator, secondNumber);
+		firstNumber = getResult(firstNumber, operator, secondNumber)
 		appendToValueDisplay("0");
+		// appendToCalcDisplay(firstNumber)
 		numberInput = "0";
 		secondNumber = 0;
 		operator = "";
@@ -151,7 +152,7 @@ function getResult(firstNumber, operator, secondNumber) {
 
 		return 0;
 	} else {
-		result = operate(firstNumber, operator, secondNumber);
+		result = Math.round((operate(firstNumber, operator, secondNumber).toFixed(3)) * 10000) / 10000;
 		appendToCalcDisplay(result);
 		return result;
 	}
