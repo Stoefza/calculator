@@ -15,8 +15,7 @@ const operationButtons = document.querySelectorAll(".operator-button");
 
 toggleNegative.addEventListener("click", () => {
 	let newSignNumber = switchSign(numberInput);
-	numberInput = `${newSignNumber}`;
-	displayValue.textContent = `${numberInput}`;
+	
 });
 
 // Adds an event listener to each number button and appends the number to numberInput
@@ -98,20 +97,18 @@ operationButtons.forEach(operationButton => {
 			appendToValueDisplay(0);
 			appendToCalcDisplay(firstNumber + operator);
 		} else {
-			if (operator === "" && numberInput == '0') {
+			if (operator === "" && numberInput == "0") {
 				operator = operationButton.textContent;
-				firstNumber = parseFloat(result)
+				firstNumber = parseFloat(result);
 				// appendToValueDisplay(operator);
 				appendToCalcDisplay(firstNumber + operator);
-			} else if (operator === "" && numberInput !== '0'){
+			} else if (operator === "" && numberInput !== "0") {
 				operator = operationButton.textContent;
-				firstNumber = parseFloat(numberInput)
+				firstNumber = parseFloat(numberInput);
 				// appendToValueDisplay(operator);
 				appendToCalcDisplay(firstNumber + operator);
 				appendToValueDisplay(0);
-
-				
-			}else {
+			} else {
 				let newOperator = operationButton.textContent;
 				secondNumber = parseFloat(numberInput);
 				firstNumber = getResult(firstNumber, operator, secondNumber);
@@ -122,13 +119,12 @@ operationButtons.forEach(operationButton => {
 		}
 
 		numberInput = "0";
-
 	});
 });
 
 equalsButton.addEventListener("click", () => {
 	if (operator != "") {
-		if (numberInput == "" ) {
+		if (numberInput == "") {
 			secondNumber = firstNumber;
 		} else {
 			secondNumber = parseFloat(numberInput);
@@ -152,10 +148,10 @@ function getResult(firstNumber, operator, secondNumber) {
 		secondNumber = 0;
 		numberInput = "0";
 		operator = "";
-		
+
 		return 0;
 	} else {
-		result = operate(firstNumber, operator, secondNumber)
+		result = operate(firstNumber, operator, secondNumber);
 		appendToCalcDisplay(result);
 		return result;
 	}
@@ -176,6 +172,8 @@ function switchSign(numberInput) {
 	} else if (parseInt(numberInput) < 0) {
 		let makePositive = numberInput * -1;
 		return makePositive;
+	} else if (numberInput == 0) {
+		return numberInput
 	}
 }
 
